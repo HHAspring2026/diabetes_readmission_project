@@ -11,6 +11,29 @@ We have been assigned a new project from the Director of Clinical Informatics to
 ## Dataset
 https://archive.ics.uci.edu/ml/datasets/Diabetes+130-US+hospitals+for+years+1999-2008 
 
+## Repo Structure
+diabetes_readmission_project/
+│
+├── data/
+│   ├── diabetic_data.csv
+│   └── cleaned_diabetic_data.csv
+│
+├── src/
+│   ├── data_cleaning.py
+│   ├── analysis.py
+│   └── run_all.py
+│
+├── images/
+│   ├── anova_results.csv
+│   ├── cluster_summary.csv
+│   ├── clusters_scatter.png
+│   ├── correlation_heatmap.png
+│   ├── top_linear_predictors.png
+│   ├── top_logistics_predictors.png
+│
+├── README.md
+├── requirements.txt
+
 ## Team Members
 - Anita Liu
 - Angel Huang 
