@@ -12,11 +12,11 @@ We have been assigned a new project from the Director of Clinical Informatics to
 https://archive.ics.uci.edu/ml/datasets/Diabetes+130-US+hospitals+for+years+1999-2008 
 
 ## Team Members
+- Anita Liu
+- Angel Huang 
 - Huma Babar
 - Aarav Desai
 - Tanveer Kaur 
-- Anita Liu
-- Angel Huang 
 
 # Part 1: Python Analytics (HHA 550)
 
