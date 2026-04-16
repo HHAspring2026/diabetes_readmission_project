@@ -1,7 +1,10 @@
+import subprocess
 from data_cleaning import clean_data
-from analysis import run_analysis
 
-df = clean_data("data/diabetic_data.csv")
-run_analysis(df)
+# Step 1: clean the raw dataset
+clean_data("data/diabetic_data.csv")
 
-print("Analysis complete. Check images folder.")
+# Step 2: run the analysis script
+subprocess.run(["python", "src/analysis.py"], check=True)
+
+print("Full pipeline complete.")
