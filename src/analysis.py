@@ -110,6 +110,46 @@ plt.tight_layout()
 plt.savefig("images/top_logistic_predictors.png")
 plt.close()
 
+# Decision Tree
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import plot_tree
+
+print("\n================ DECISION TREE ================")
+
+dt_model = DecisionTreeClassifier(max_depth=5, random_state=42)
+dt_model.fit(X_train, y_train)
+
+dt_pred = dt_model.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, dt_pred))
+print("\nClassification Report:")
+print(classification_report(y_test, dt_pred))
+
+# Feature importance
+dt_importance = pd.DataFrame({
+    "Feature": X_encoded.columns,
+    "Importance": dt_model.feature_importances_
+})
+
+dt_importance = dt_importance.sort_values(by="Importance", ascending=False)
+
+print("\nTop Decision Tree Predictors:")
+print(dt_importance.head(10))
+
+#Remove Age Variables
+dt_importance = dt_importance[
+    ~dt_importance["Feature"].str.contains("age", case=False, na=False)
+]
+
+top_dt = dt_importance.head(10)
+
+plt.figure(figsize=(10, 6))
+sns.barplot(data=top_dt, x="Importance", y="Feature")
+plt.title("Decision Tree Feature Importance")
+plt.tight_layout()
+plt.savefig("images/decision_tree_importance.png")
+plt.close()
+
 #Linear Regression
 lin_model = LinearRegression()
 lin_model.fit(X_train_scaled, y_train)
@@ -139,6 +179,45 @@ lin_importance = lin_importance[
 ]
 
 top_lin = lin_importance.head(10)
+
+# Random Forest
+
+from sklearn.ensemble import RandomForestClassifier
+print("\n================ RANDOM FOREST ================")
+
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(X_train, y_train)
+
+rf_pred = rf_model.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, rf_pred))
+print("\nClassification Report:")
+print(classification_report(y_test, rf_pred))
+
+# Feature Importance
+rf_importance = pd.DataFrame({
+    "Feature": X_encoded.columns,
+    "Importance": rf_model.feature_importances_
+})
+
+rf_importance = rf_importance.sort_values(by="Importance", ascending=False)
+
+print("\nTop Random Forest Predictors:")
+print(rf_importance.head(10))
+
+# Remove Age Variables
+rf_importance = rf_importance[
+    ~rf_importance["Feature"].str.contains("age", case=False, na=False)
+]
+
+top_rf = rf_importance.head(10)
+
+plt.figure(figsize=(10,6))
+sns.barplot(data=top_rf, x="Importance", y="Feature")
+plt.title("Random Forest Feature Importance")
+plt.tight_layout()
+plt.savefig("images/random_forest_importance.png")
+plt.close()
 
 #ANOVA
 print("\n================ ANOVA RESULTS ================")
