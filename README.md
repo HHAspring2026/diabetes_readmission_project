@@ -1,7 +1,7 @@
 # Diabetes Readmission Prediction Project
 
 ## Overview
-We have been assigned a new project from the Director of Clinical Informatics to use the diabetes dataset provided to determine the leading variables of readmission so the hospital can take corrective action to reduce the 30-daay readmission rate. Our team will clean the dataset and visualize the work done in building the diabetes readmission predictive model. We will also design the infrastructure components necessary to build, test and deploy an algorithm to predict the likelihood of 30-day readmissions in the diabetic population.
+We have been assigned a new project from the Director of Clinical Informatics to use the diabetes dataset provided to determine the leading variables of readmission so the hospital can take corrective action to reduce the 30-day readmission rate. Our team will clean the dataset and visualize the work done in building the diabetes readmission predictive model. We will also design the infrastructure components necessary to build, test and deploy an algorithm to predict the likelihood of 30-day readmissions in the diabetic population.
 
 ### Three Components
 1. Python Analytics (HHA550)
@@ -28,6 +28,8 @@ diabetes_readmission_project/
 │   ├── cluster_summary.csv
 │   ├── clusters_scatter.png
 │   ├── correlation_heatmap.png
+│   ├── decision_tree_importance.png
+│   ├── random_forest_importance.png
 │   ├── top_linear_predictors.png
 │   ├── top_logistics_predictors.png
 │
@@ -62,6 +64,8 @@ Identify the fewest variables required to predict 30-day readmission using stati
 3. Logistic Regression
 4. ANOVA 
 5. Clustering
+6. Decision Tree
+7. Random Forest
 
 ## Final Variables
 - number_inpatient

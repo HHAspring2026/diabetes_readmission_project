@@ -225,8 +225,10 @@ print("\n================ ANOVA RESULTS ================")
 anova_vars = [
     "number_inpatient",
     "number_emergency",
+    "number_outpatient",   
     "time_in_hospital",
     "num_medications",
+    "num_procedures",      
     "number_diagnoses"
 ]
 
@@ -253,8 +255,10 @@ print("\n================ CLUSTERING ================")
 cluster_features = [
     "number_inpatient",
     "number_emergency",
+    "number_outpatient",   
     "time_in_hospital",
     "num_medications",
+    "num_procedures",     
     "number_diagnoses"
 ]
 

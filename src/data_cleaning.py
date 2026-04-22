@@ -31,18 +31,20 @@ def clean_data(input_path, output_path="data/cleaned_diabetic_data.csv"):
 
     # Keep only your final variables
     selected_columns = [
-        "age",
-        "gender",
-        "insulin",
-        "diabetesMed",
-        "number_inpatient",
-        "number_emergency",
-        "time_in_hospital",
-        "num_medications",
-        "number_diagnoses",
-        "admission_type_id",
-        "readmit_30"
-    ]
+    "age",
+    "gender",
+    "insulin",
+    "diabetesMed",
+    "number_inpatient",
+    "number_emergency",
+    "number_outpatient", 
+    "time_in_hospital",
+    "num_medications",
+    "num_procedures",      
+    "number_diagnoses",
+    "admission_type_id",
+    "readmit_30"
+]
 
     df = df[selected_columns].copy()
 
