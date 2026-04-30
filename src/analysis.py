@@ -154,6 +154,27 @@ plt.tight_layout()
 plt.savefig("images/model_evaluation_metrics.png")
 plt.close()
 
+# Confusion Matrix Heatmap
+cm = confusion_matrix(y_test, y_pred)
+
+plt.figure(figsize=(6,5))
+sns.heatmap(
+    cm,
+    annot=True,
+    fmt="d",
+    cmap="Blues",
+    xticklabels=["No Readmission", "Readmitted"],
+    yticklabels=["No Readmission", "Readmitted"]
+)
+
+plt.title("Confusion Matrix - Logistic Regression")
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+
+plt.tight_layout()
+plt.savefig("images/confusion_matrix.png")
+plt.close()
+
 # Decision Tree
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import plot_tree
