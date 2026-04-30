@@ -1,0 +1,11 @@
+Metric,Value
+AUC,0.642
+Accuracy,0.889
+Recall,0.015
+Precision,0.532
+F1 Score,0.028
+Specificity,0.998
+True Negatives,18053.0
+False Positives,29.0
+False Negatives,2238.0
+True Positives,33.0

@@ -110,6 +110,50 @@ plt.tight_layout()
 plt.savefig("images/top_logistic_predictors.png")
 plt.close()
 
+# Model Evaluation Metrics
+from sklearn.metrics import roc_auc_score, precision_score, recall_score, f1_score
+
+# Calculate metrics
+auc = roc_auc_score(y_test, log_model.predict_proba(X_test_scaled)[:,1])
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
+specificity = tn / (tn + fp) if (tn + fp) != 0 else 0
+
+# Create dataframe
+performance_df = pd.DataFrame({
+    "Metric": [
+        "AUC", "Accuracy", "Recall", "Precision", "F1 Score", "Specificity",
+        "True Negatives", "False Positives", "False Negatives", "True Positives"
+    ],
+    "Value": [
+        auc,
+        accuracy_score(y_test, y_pred),
+        recall,
+        precision,
+        f1,
+        specificity,
+        tn, fp, fn, tp
+    ]
+})
+
+# Round values for cleaner output
+performance_df["Value"] = performance_df["Value"].round(3)
+
+# Save CSV
+performance_df.to_csv("images/model_evaluation_metrics.csv", index=False)
+
+# Visualization
+plt.figure(figsize=(8,5))
+sns.barplot(data=performance_df.iloc[:6], x="Value", y="Metric")
+plt.title("Logistic Regression Model Evaluation Metrics")
+plt.xlim(0,1)
+plt.tight_layout()
+plt.savefig("images/model_evaluation_metrics.png")
+plt.close()
+
 # Decision Tree
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import plot_tree
@@ -291,6 +335,101 @@ sns.scatterplot(
 plt.title("Patient Clusters: number_inpatient vs num_medications")
 plt.tight_layout()
 plt.savefig("images/clusters_scatter.png")
+plt.close()
+
+# Final selected predictors visual
+final_vars = [
+    "number_inpatient",
+    "num_medications",
+    "time_in_hospital",
+    "number_diagnoses"
+]
+
+final_importance = rf_importance[rf_importance["Feature"].isin(final_vars)]
+
+plt.figure(figsize=(9, 5))
+sns.barplot(data=final_importance, x="Importance", y="Feature")
+plt.title("Final Selected Predictors of 30-Day Readmission")
+plt.xlabel("Random Forest Importance")
+plt.ylabel("Variable")
+plt.tight_layout()
+plt.savefig("images/final_selected_predictors.png")
+plt.close()
+
+# Readmission rate by number of prior inpatient visits
+df["inpatient_group"] = pd.cut(
+    df["number_inpatient"],
+    bins=[-1, 0, 1, 2, 5, df["number_inpatient"].max()],
+    labels=["0", "1", "2", "3-5", "6+"]
+)
+
+inpatient_rate = df.groupby("inpatient_group")["readmit_30"].mean().reset_index()
+
+plt.figure(figsize=(8, 5))
+sns.barplot(data=inpatient_rate, x="inpatient_group", y="readmit_30")
+plt.title("30-Day Readmission Rate by Prior Inpatient Visits")
+plt.xlabel("Prior Inpatient Visits")
+plt.ylabel("Readmission Rate")
+plt.tight_layout()
+plt.savefig("images/readmission_by_inpatient_visits.png")
+plt.close()
+
+# Readmission rate by medication count
+df["medication_group"] = pd.cut(
+    df["num_medications"],
+    bins=[0, 10, 20, 30, 40, df["num_medications"].max()],
+    labels=["1-10", "11-20", "21-30", "31-40", "41+"]
+)
+
+med_rate = df.groupby("medication_group")["readmit_30"].mean().reset_index()
+
+plt.figure(figsize=(8, 5))
+sns.barplot(data=med_rate, x="medication_group", y="readmit_30")
+plt.title("30-Day Readmission Rate by Number of Medications")
+plt.xlabel("Number of Medications")
+plt.ylabel("Readmission Rate")
+plt.tight_layout()
+plt.savefig("images/readmission_by_medications.png")
+plt.close()
+
+# Model accuracy comparison
+model_scores = pd.DataFrame({
+    "Model": ["Logistic Regression", "Decision Tree", "Random Forest"],
+    "Accuracy": [
+        accuracy_score(y_test, y_pred),
+        accuracy_score(y_test, dt_pred),
+        accuracy_score(y_test, rf_pred)
+    ]
+})
+
+plt.figure(figsize=(8, 5))
+sns.barplot(data=model_scores, x="Model", y="Accuracy")
+plt.title("Model Accuracy Comparison")
+plt.ylim(0, 1)
+plt.xlabel("Model")
+plt.ylabel("Accuracy")
+plt.tight_layout()
+plt.savefig("images/model_accuracy_comparison.png")
+plt.close()
+
+# Model accuracy comparison
+model_scores = pd.DataFrame({
+    "Model": ["Logistic Regression", "Decision Tree", "Random Forest"],
+    "Accuracy": [
+        accuracy_score(y_test, y_pred),
+        accuracy_score(y_test, dt_pred),
+        accuracy_score(y_test, rf_pred)
+    ]
+})
+
+plt.figure(figsize=(8, 5))
+sns.barplot(data=model_scores, x="Model", y="Accuracy")
+plt.title("Model Accuracy Comparison")
+plt.ylim(0, 1)
+plt.xlabel("Model")
+plt.ylabel("Accuracy")
+plt.tight_layout()
+plt.savefig("images/model_accuracy_comparison.png")
 plt.close()
 
 #Summary
