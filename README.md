@@ -28,9 +28,16 @@ diabetes_readmission_project/
 │   ├── anova_results.csv
 │   ├── cluster_summary.csv
 │   ├── clusters_scatter.png
+│   ├── confusion_matrix.png
 │   ├── correlation_heatmap.png
 │   ├── decision_tree_importance.png
+│   ├── final_selected_predictors.png
+│   ├── model_accuracy_comparison.png
+│   ├── model_evaluation_metrics.csv
+│   ├── model_evaluation_metrics.png
 │   ├── random_forest_importance.png
+│   ├── readmission_by_inpatient_visits.png
+│   ├── readmission_by_medications.png
 │   ├── top_linear_predictors.png
 │   ├── top_logistics_predictors.png
 │
