@@ -42,6 +42,19 @@ diabetes_readmission_project/
 │   ├── top_linear_predictors.png
 │   ├── top_logistics_predictors.png
 │
+├── tableau_visualization/     
+│   ├── healthcare_utilization_age.png
+│   ├── prior_inpatient_visits.png
+│   ├── outpatient_visits.png
+│   ├── combined_utilization_heatmap.png
+│   ├── clinical_complexity_scatter.png
+│   ├── insulin_age_heatmap.png
+│   ├── procedures_by_age.png
+│   ├── readmissions_by_gender.png
+│   ├── age_diabetesMed_readmissions.png
+│   ├── readmissions_by_time_in_hospital.png
+│   └── aws_architecture.png
+│
 ├── README.md
 ├── requirements.txt
 ```
